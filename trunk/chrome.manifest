@@ -1,0 +1,7 @@
+content	backoffice	content/
+overlay	chrome://browser/content/browser.xul	chrome://backoffice/content/overlay.xul
+
+locale	backoffice	 en-US	locale/en-US/
+
+skin	backoffice 	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://backoffice/skin/overlay.css
