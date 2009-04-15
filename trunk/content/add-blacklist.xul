@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="add-blacklist" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="BlackList"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0])">
+	  <script src="jquery.js"/>
+	  <script src="blacklist.js"/>
+	  <script type="application/x-javascript">
+	       function init(data) {
+                    if(data == "input"){
+                         $("input[type='text']").each(function(){
+                             alert($(this).val());
+                         });
+                    }else if(data == "add"){
+                         var blacklist = document.getElementById("black-list");
+                         var textbox = blacklist.ownerDocument.createElement("textbox");
+                         textbox.setAttribute("id", "blacklist-0");
+                         textbox.setAttribute("value", "");
+                         blacklist.appendChild(textbox);
+                         document.getElementById('totalNum').value = 0;
+                    }else{
+                         var email_arry = data.match(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ig);
+                         for (var x in email_arry)
+                         {
+                              //alert(x.toString());
+                              //document.getElementById('list-' + x.toString()).value = email_arry[x];
+                              var blacklist = document.getElementById("black-list");
+                              
+                              var hbox = blacklist.ownerDocument.createElement("hbox");
+                              hbox.setAttribute("id", "hbox-" + x.toString());
+                              blacklist.appendChild(hbox);
+                         
+                              var textbox = hbox.ownerDocument.createElement("textbox");
+                              textbox.setAttribute("id", "blacklist-" + x.toString());
+                              textbox.setAttribute("value", email_arry[x]);
+                              hbox.appendChild(textbox);
+                              
+                              var button = hbox.ownerDocument.createElement("button");
+                              button.setAttribute("label", "remove");
+                              button.setAttribute("oncommand", "document.getElementById('hbox-"+x.toString()+"').parentNode.removeChild(document.getElementById('hbox-"+x.toString()+"'));document.getElementById('totalNum').value=(document.getElementById('totalNum').value-1)");
+                              button.setAttribute("style", "width:5px");
+                              hbox.appendChild(button);
+                         }
+                         document.getElementById('totalNum').value = x;
+                    }
+	       }
+	  </script>
+	  <groupbox id="black-list">
+	      <caption label="Add Below Email to BlackList"/>
+	  </groupbox>
+	  <hbox>
+	    <button label="Add" oncommand="BlackList.addBlacklist();"/>
+	    <button label="Cancel" oncommand="window.close();window.openDialog('chrome://backoffice/content/manage-blacklist.xul','backoffice-'+(new Date()).getTime(),'centerscreen,chrome,resizable,height=250,width=500');"/>
+	    <label id="totalNum" disabled="true"/>
+	  </hbox>
+</page>

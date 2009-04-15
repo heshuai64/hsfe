@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="edit-blacklist" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="BlackList"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0], window.arguments[1])">
+	  <script src="jquery.js"/>
+	  <script src="blacklist.js"/>
+	  <script type="application/x-javascript">
+	       function init(idArray, emailArray) {
+		    for (var x in emailArray)
+		    {
+			 var blacklist = document.getElementById("blacklist");
+                         
+                         var hbox = blacklist.ownerDocument.createElement("hbox");
+                         blacklist.appendChild(hbox);
+                         
+                         var label = hbox.ownerDocument.createElement("label");
+                         label.setAttribute("id", "blacklistI-" + x.toString());
+                         label.setAttribute("value", idArray[x]);
+                         label.setAttribute("style", "padding-top:5px");
+                         hbox.appendChild(label);
+                         
+			 var textbox = hbox.ownerDocument.createElement("textbox");
+			 textbox.setAttribute("id", "blacklistV-" + x.toString());
+			 textbox.setAttribute("value", emailArray[x]);
+			 hbox.appendChild(textbox);
+		    }
+		    document.getElementById('totalNum').value = emailArray.length-1;
+	       }
+	  </script>
+	  <groupbox id="blacklist">
+	      <caption label="Edit BlackList Email"/>
+	  </groupbox>
+	  <hbox>
+	    <button label="Submit" oncommand="BlackList.update();"/>
+	    <button label="Cancel" oncommand="window.close();window.openDialog('chrome://backoffice/content/manage-blacklist.xul','backoffice-'+(new Date()).getTime(),'centerscreen,chrome,resizable,height=250,width=500');"/>
+	    <label id="totalNum" disabled="true"/>
+	  </hbox>
+</page>

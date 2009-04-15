@@ -1,0 +1,27 @@
+
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="about" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="URL Poster"
+        xmlns:h="http://www.w3.org/1999/xhtml">
+<description class="header">Back Office Firefox Extend</description>
+<groupbox>
+   <caption label="Author"/>
+   <description>
+      This tool was developed to help Custom Service the use of BackOffice.
+   </description>
+</groupbox>
+<groupbox>
+   <caption label="Feedback"/>
+   <description>
+      Comments, issues, suggestions?  Please contact me at heshuai64@gmail.com!  
+   </description>
+</groupbox>
+<description class="ident">&#xa9; 2008 He Shuai &lt;heshuai64@gmail.com></description>
+   <hbox>
+      <spacer flex="1"/>
+      <button label="Close" oncommand="window.close();"/>
+      <spacer flex="1"/>
+   </hbox>
+</page>
+

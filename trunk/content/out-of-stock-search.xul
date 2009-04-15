@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="out-of-stock-search" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Out Of Stock Search"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init()">
+        <script src="jquery.js"/>
+        <script src="outOfStock.js"/>
+	<script type="application/x-javascript">
+          <![CDATA[
+	  function init(){
+	       var currentTime = new Date();
+	       var month = currentTime.getMonth() + 1;
+	       var day_1 = currentTime.getDate();
+               var day_2 = currentTime.getDate() - 1;
+	       var year = currentTime.getFullYear();
+	       if(10 > month){
+		    month = "0" + month; 
+	       }
+     
+	       var today = year + "-" + month + "-" + day_1;
+               var yesterday = year + "-" + month + "-" + day_2;
+	       document.getElementById("start_time").value = yesterday;
+	       document.getElementById("end_time").value = today;
+	  }
+          
+          ]]>
+	</script>
+	  <vbox>
+	  <hbox>
+	      <!--<datepicker id="start_time" type="grid"/>-->
+	      <!--<datepicker id="end_time" type="grid"/>-->
+	      <label value="Start Date" style="padding-top:6px"/>
+	      <textbox id="start_time" style="width:120px"/>
+	      <label value="(yyyy-MM-dd)" style="padding-top:6px"/>
+	  </hbox>
+	  <hbox>
+	       <label value="End Date" style="padding-top:6px"/>
+	       <textbox id="end_time" style="width:125px"/>
+	       <label value="(yyyy-MM-dd)" style="padding-top:6px"/>
+	  </hbox>
+	  <hbox style="padding-left:40px">
+	      <button label="Submit" oncommand="outOfStock.search();"/>
+	      <button label="Close" oncommand="window.close();"/>
+	  </hbox>
+	  </vbox>
+</page>

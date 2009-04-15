@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="look-email" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Look Email"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0],window.arguments[1],window.arguments[2],window.arguments[3])">
+        <script src="jquery.js"/>
+        <script src="outOfStock.js"/>
+        <script type="application/x-javascript">
+        <![CDATA[
+            function init(shipToAttn, content, skuId, itemId){
+                //outOfStock.log(shipmentDetail);
+                var emailTemplateBox = document.getElementById("email-template-box");
+                
+                content = content.replace(/name#/g, shipToAttn);
+                content = content.replace(/item#/g, itemId);   
+                var vbox = emailTemplateBox.ownerDocument.createElement("vbox");
+                emailTemplateBox.appendChild(vbox);
+                
+                var label = vbox.ownerDocument.createElement("label");
+                label.setAttribute("value", "Email Content");
+                label.setAttribute("style", "align:center");
+                vbox.appendChild(label);
+                
+                var textbox = vbox.ownerDocument.createElement("textbox");
+                textbox.setAttribute("readonly", "true");
+                textbox.setAttribute("multiline", "true");
+                textbox.setAttribute("height", "160");
+                textbox.setAttribute("value", content);
+                vbox.appendChild(textbox);
+                
+            }
+        ]]>
+        </script>
+    
+        <vbox id="email-template-box">
+            
+        </vbox>
+
+        <hbox style="padding-left:300px">
+            <button label="Close" oncommand="window.close();"/>
+        </hbox>
+</page>

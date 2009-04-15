@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="generate-cleanup" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="生成清扫提交"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init()">
+        <script src="jquery.js"/>
+	<script type="application/x-javascript">
+	  function init(){
+	       var currentTime = new Date();
+	       var month = currentTime.getMonth() + 1;
+	       var day_1 = currentTime.getDate();
+               var day_2 = currentTime.getDate() - 1;
+	       var year = currentTime.getFullYear();
+	       if(10 > month){
+		    month = "0" + month; 
+	       }
+               
+               if(10 > day_1){
+		    day_1 = "0" + day_1; 
+	       }
+               
+               if(10 > day_2){
+		    day_2 = "0" + day_2; 
+	       }
+               
+	       var today = year + "-" + month + "-" + day_1;
+               var yesterday = year + "-" + month + "-" + day_2;
+	       document.getElementById("start_time").value = yesterday;
+	       document.getElementById("end_time").value = today;
+	  }
+          
+          function generateCleanup(){
+                var currentTime = new Date();
+	        var month = currentTime.getMonth() + 1;
+	        var day = currentTime.getDate();
+	        var year = currentTime.getFullYear();
+                
+               if(10 > month){
+		    month = "0" + month; 
+	       }
+                
+               if(10 > day){
+		    day = "0" + day; 
+	       }
+                
+                var date = year + month + day;
+                
+                var progressDialog = window.openDialog('chrome://backoffice/content/wait.xul','progress'+(new Date()).getTime(),'centerscreen,chrome,resizable',
+                    {
+                        url: "http://192.168.0.207/service/cleanup.php",
+                        status: "Please wait..."
+                    }
+                );
+        
+                $.ajax({
+                    type: "GET",
+                    url: "http://192.168.0.207/service/cleanup.php",
+                    data: {startDate:$("#start_time").val(), endDate: $("#end_time").val(), type: $("#type").val()},
+                    success: function(msg){
+                            progressDialog.close();
+                            //alert("generate cleanup success, Please see the address 'http://192.168.0.207/cleanup/'.");
+                            window.close();
+                            window.open('http://192.168.0.207/cleanup/'+date,'mywindow');
+                    }
+                });
+          }
+	</script>
+	  <vbox>
+	  <hbox>
+	      <!--<datepicker id="start_time" type="grid"/>-->
+	      <!--<datepicker id="end_time" type="grid"/>-->
+	      <label value="开始日期:" style="padding-top:6px"/>
+	      <textbox id="start_time" style="width:120px"/>
+	      <label value="日期格式(年-月-日)" style="padding-top:6px"/>
+	  </hbox>
+	  <hbox>
+	       <label value="结束日期:" style="padding-top:6px"/>
+	       <textbox id="end_time" style="width:120px"/>
+	       <label value="日期格式(年-月-日)" style="padding-top:6px"/>
+	  </hbox>
+          <hbox>
+               <label value="类型:" style="padding-top:6px;padding-left:10px;padding-right:18px"/>
+	       <menulist id="type" >
+	          <menupopup>
+	            <menuitem label="请选择类型" value="" selected="true"/>
+                    <menuitem label="全部" value="A" />
+                    <menuitem label="有库存" value="S" />
+	          </menupopup>
+	       </menulist>
+          </hbox>
+	  <hbox style="padding-left:65px">
+	      <button label="生成" oncommand="generateCleanup();"/>
+	      <button label="关闭" oncommand="window.close();"/>
+	  </hbox>
+	  </vbox>
+</page>

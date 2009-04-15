@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="select-order-list" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="selected Order List"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0])">
+      <script src="backoffice.js"/>
+      <script src="jquery.js"/>
+      <script type="application/x-javascript">
+	    function init(data) {
+		  data = data.match(/ORD([A-Z0-9])+/ig);
+		  if(data == null){
+			alert("sorry, can not get orders id,");
+			return 0;
+		  }
+		  Search.search(data.join(','), 'order');
+	    }
+      </script>
+</page>

@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="email-confirm" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Send Email Confirm"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0], window.arguments[1], window.arguments[2], window.arguments[3])">
+            <script src="jquery.js"/>
+            <script src="outOfStock.js"/>
+            <script type="application/x-javascript">
+                  function init(shipmentIdArray, emailArray, statusArray, templateArray) {
+                           var emailConfirmBox = document.getElementById("email-confirm-box");
+                           var hbox = emailConfirmBox.ownerDocument.createElement("hbox");
+                           emailConfirmBox.appendChild(hbox);
+                            
+                           var label = hbox.ownerDocument.createElement("label");
+                           label.setAttribute("value", "ShipmentId");
+                           label.setAttribute("style", "padding-top:5px");
+                           hbox.appendChild(label);
+                           
+                           var label = hbox.ownerDocument.createElement("label");
+                           label.setAttribute("value", "Email Address");
+                           label.setAttribute("style", "padding-top:5px;padding-left:50px");
+                           hbox.appendChild(label);
+                           
+                           var label = hbox.ownerDocument.createElement("label");
+                           label.setAttribute("value", "Send Status");
+                           label.setAttribute("style", "padding-top:5px;padding-left:80px");
+                           hbox.appendChild(label);
+                               
+                           var label = hbox.ownerDocument.createElement("label");
+                           label.setAttribute("value", "Template");
+                           label.setAttribute("style", "padding-top:5px;padding-left:30px");
+                           hbox.appendChild(label);
+                           
+                           var label = hbox.ownerDocument.createElement("label");
+                           label.setAttribute("value", "Email Content");
+                           label.setAttribute("style", "padding-top:5px;padding-left:40px");
+                           hbox.appendChild(label);
+                           
+                           for (var x in shipmentIdArray){
+                               var hbox = emailConfirmBox.ownerDocument.createElement("hbox");
+                               emailConfirmBox.appendChild(hbox);
+                                
+                               var label = hbox.ownerDocument.createElement("label");
+                               label.setAttribute("id", "shipmentId-" + x.toString());
+                               label.setAttribute("value", shipmentIdArray[x]);
+                               label.setAttribute("style", "padding-top:5px");
+                               hbox.appendChild(label);
+                               
+                               var label = hbox.ownerDocument.createElement("label");
+                               label.setAttribute("id", "email-" + x.toString());
+                               label.setAttribute("value", emailArray[x]);
+                               label.setAttribute("style", "padding-top:5px");
+                               label.setAttribute("crop", "end");
+                               label.setAttribute("width", "180px");
+                               hbox.appendChild(label);
+                               /*
+                               var label = hbox.ownerDocument.createElement("label");
+                               label.setAttribute("value", statusArray[x]);
+                               label.setAttribute("crop", "end");
+                               label.setAttribute("width", "70px");
+                               label.setAttribute("style", "padding-top:5px;padding-left:40px");
+                               hbox.appendChild(label);
+                               */
+                               var image = hbox.ownerDocument.createElement("image");
+                               if(statusArray[x] == 1){
+                                  var src = "chrome://backoffice/skin/mail.png";
+                               }else{
+                                  var src = "chrome://backoffice/skin/noMail.png";
+                               }
+                               image.setAttribute("id","image-" + x.toString());
+                               image.setAttribute("src",src);
+                               //image.setAttribute("width", "70px");
+                               image.setAttribute("style", "padding-top:5px;padding-left:40px;padding-right:40px");
+                               hbox.appendChild(image);
+                               
+                               //-------------------- menulist-----------------------------
+                               var menulist = hbox.ownerDocument.createElement("menulist");
+                               menulist.setAttribute("id", "template-" + x.toString());
+                               //menulist.setAttribute("style", "padding-top:5px;padding-left:20px");
+                               menulist.setAttribute("width", "120px");
+                               menulist.setAttribute("height", "30px");
+                               menulist.setAttribute("label", "Please select");
+                               menulist.setAttribute("value", "0");
+                               hbox.appendChild(menulist);
+                               
+                               var menupopup = menulist.ownerDocument.createElement("menupopup");
+                               menulist.appendChild(menupopup);
+                               
+                               for(var i in templateArray){
+                                    var menuitem = menupopup.ownerDocument.createElement("menuitem");
+                                    menuitem.setAttribute("label", templateArray[i].name);
+                                    menuitem.setAttribute("value", templateArray[i].name);
+                                    menupopup.appendChild(menuitem);
+                               }
+                               /*
+                               var menuitem = menupopup.ownerDocument.createElement("menuitem");
+                               menuitem.setAttribute("label", "1");
+                               menuitem.setAttribute("value", "1");
+                               menuitem.setAttribute("selected", "true");
+                               menupopup.appendChild(menuitem);
+                               
+                               var menuitem = menupopup.ownerDocument.createElement("menuitem");
+                               menuitem.setAttribute("label", "2");
+                               menuitem.setAttribute("value", "2");
+                               menupopup.appendChild(menuitem);
+                               */
+                               //-------------------------------------------------------------------
+                               
+                               var button = hbox.ownerDocument.createElement("button");
+                               button.setAttribute("id", x.toString());
+                               button.setAttribute("label", "Look");
+                               button.setAttribute("oncommand", "outOfStock.lookEmailContent(this)");
+                               hbox.appendChild(button);
+                           }
+                           document.getElementById('totalNum').value = emailArray.length-1;  
+                  }
+            </script>
+
+	<vbox id="email-confirm-box">
+        </vbox>
+
+        <hbox style="padding-left:200px">
+            <button label="Send" oncommand="outOfStock.sendEmail();"/>
+            <button label="Close" oncommand="window.close();"/>
+            <label id="totalNum" disabled="true"/>
+        </hbox>
+</page>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="check-blacklist" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="BlackList"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0])">
+	  <script src="jquery.js"/>
+	  <script src="blacklist.js"/>
+	  <script type="application/x-javascript">
+	       function init(data) {
+		    var email_arry = data.match(/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ig);
+		    BlackList.checkBlacklist(email_arry);
+	       }
+	  </script>
+            <tree id="email-list" flex="1" rows="8">
+		  <treecols>
+		    <treecol id="email" label="Email" flex="2"/>  
+		    <treecol id="blacklist-yn" label="Blacklist"  flex="1"/>
+		  </treecols>
+		
+		  <treechildren id="email-list-treechildren"/>
+		
+            </tree>
+	    <button label="Close" oncommand="window.close();"/>
+</page>

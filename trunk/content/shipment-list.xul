@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<window id="shipment-list" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Shipment List"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="Search.shipmentList(window.arguments[0]);">
+	 <script src="backoffice.js"/>
+	 <script src="jquery.js"/>
+	 <vbox  style="overflow: auto" flex="100">
+                  <tree id="shipment-list-tree" flex="1" rows="10">
+                        <treecols>
+                          <treecol id="shipmentId" label="Shipment Id" primary="true" flex="1"/>  
+                          <treecol id="dcId" label="Dispatch"  flex="0"/>
+                          <treecol id="shipToAttn" label="Ship To" flex="1"/>
+                          <treecol id="ordersId" label="Order Id" flex="1"/>
+                          <treecol id="sellerId" label="seller" flex="0"/>
+                          <treecol id="createdOn" label="Created On" flex="1"/>
+                          <treecol id="deliverOn" label="Deliver On" flex="1"/>
+                          <treecol id="shippedOn" label="Shipped On" flex="1"/>
+                          <treecol id="status" label="Status" flex="1"/>
+                        </treecols>
+                      
+                        <treechildren id="shipment-list-treechildren"/>
+                      
+                  </tree>
+                  <hbox>
+                        <button label="Open" oncommand="Search.openShipmentDetailWindow();"/>
+                        <button label="Close" oncommand="window.close();"/>
+                  </hbox>
+	 </vbox>
+</window>

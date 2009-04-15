@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="out-of-stock-email-template-manage" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Email Template Manage"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init()">
+            <script src="jquery.js"/>
+            <script src="outOfStock.js"/>
+            <script type="application/x-javascript">
+                function init() {
+                  outOfStock.templateManage('read');
+                }
+            </script>
+
+	 <menupopup id="menupopup-editRow">
+                  <menuitem label="Add Blacklist" accesskey="A" oncommand="window.close();outOfStock.templateManage('add')"/>
+		  <menuitem label="Edit Selected" accesskey="E" oncommand="window.close();outOfStock.templateManage('edit')"/>
+		  <menuitem label="Delete Selected" accesskey="D" oncommand="window.close();outOfStock.templateManage('delete')"/>
+  	 </menupopup>
+	 <tree id="template-tree" flex="1" rows="10">
+		  <treecols>
+		    <treecol id="name" label="Name" primary="true" flex="1"/>  
+		    <treecol id="content" label="Content"  flex="2"/>
+		    <treecol id="created" label="Created" flex="1"/>
+		    <treecol id="modified" label="Modified" flex="1"/>
+		  </treecols>
+		
+		  <treechildren id="template-treechildren" context="menupopup-editRow"/>
+		
+	 </tree>
+
+         <hbox>
+               <button label="Add" accesskey="A" oncommand="window.close();outOfStock.templateManage('add');"/>
+               <button label="Edit" accesskey="E" oncommand="window.close();outOfStock.templateManage('edit');"/>
+               <button label="Delete" accesskey="D" oncommand="outOfStock.templateManage('delete');"/>
+               <button label="Close" accesskey="C" oncommand="window.close();"/>
+         </hbox>
+</page>
