@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="out-of-sotck-list" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Out Of Stock List"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0])">
+            <script src="jquery.js"/>
+            <script src="outOfStock.js"/>
+            <script type="application/x-javascript">
+            <![CDATA[
+                function init(data) {
+                    var outOfStockTreechildren = document.getElementById("out-of-stock-treechildren");
+                    for(var x in data){
+                        
+			var treeitem = outOfStockTreechildren.ownerDocument.createElement("treeitem");
+                        treeitem.setAttribute("container", "true");
+			outOfStockTreechildren.appendChild(treeitem);
+
+                        var treerow = treeitem.ownerDocument.createElement("treerow");
+                        treerow.setAttribute("id",data[x].shipmentId);
+                        treeitem.appendChild(treerow);
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].shipmentId);
+                        treerow.appendChild(treecell);
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].shipToEmail);
+                        treerow.appendChild(treecell);
+                        
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].createdOn);
+                        treerow.appendChild(treecell);
+                        
+                        if(data[x].noticeStatus == 1){
+                           var src = "chrome://backoffice/skin/mail.png";
+                        }else{
+                           var src = "chrome://backoffice/skin/noMail.png";
+                        }
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].noticeStatus);
+                        treecell.setAttribute("src",src);
+                        treerow.appendChild(treecell);
+                        
+                        var treechildren = treeitem.ownerDocument.createElement("treechildren");
+                        treeitem.appendChild(treechildren);   
+                        for(var y in data[x].shipmentdetail){
+                           var treechildrenitem = treechildren.ownerDocument.createElement("treeitem");
+                           treechildren.appendChild(treechildrenitem);
+                           
+                           var treechildrenrow = treechildrenitem.ownerDocument.createElement("treerow");     
+                           treechildrenitem.appendChild(treechildrenrow);
+                           
+                           var treechildrencell = treechildrenrow.ownerDocument.createElement("treecell");
+                           treechildrencell.setAttribute("label",data[x].shipmentdetail[y].skuId);
+                           treechildrenrow.appendChild(treechildrencell);
+                           
+                           var treechildrencell = treechildrenrow.ownerDocument.createElement("treecell");
+                           treechildrencell.setAttribute("label","quantity: "+data[x].shipmentdetail[y].quantity);
+                           treechildrenrow.appendChild(treechildrencell);
+                           
+                           var treechildrencell = treechildrenrow.ownerDocument.createElement("treecell");
+                           treechildrencell.setAttribute("label","stock: "+data[x].shipmentdetail[y].stock);
+                           treechildrenrow.appendChild(treechildrencell);
+                           
+                           var treechildrencell = treechildrenrow.ownerDocument.createElement("treecell");
+                           if(data[x].shipmentdetail[y].quantity > data[x].shipmentdetail[y].stock){
+                               var src = "chrome://backoffice/skin/b.gif";
+                           }else{
+                               var src = "chrome://backoffice/skin/a.gif";     
+                           }
+                           treechildrencell.setAttribute("src",src);
+                           treechildrenrow.appendChild(treechildrencell);
+                        }
+                    }
+                }
+                
+                function test(){
+                  var tree = document.getElementById("SHI20080913503");
+                  var cells = tree.getElementsByTagName("treecell");
+                  //cells[3].getAttribute("label");
+                  cells[3].setAttribute("src","chrome://backoffice/skin/status-icon-u.png");
+                  /*
+                  for (var i = 0; i < cells.length; i++) { 
+                      label = cells[i].getAttribute("label"); 
+                      alert(label);
+                  }
+                  */
+                }
+                ]]>
+            </script>
+
+	 <menupopup id="menupopup-Row">
+                  <menuitem label="Look Shipment" accesskey="L" oncommand=""/>
+                  <menuitem label="Send Email" accesskey="E" oncommand="outOfStock.sendEmailConfirm();"/>
+  	 </menupopup>
+	 <tree id="out-of-stock-tree" flex="1" rows="10" enableColumnDrag="true">
+		  <treecols>
+		    <treecol id="shipmentId" label="shipmentId" primary="true" flex="2"/>  
+		    <treecol id="shipToEmail" label="Email"  flex="3"/>
+		    <treecol id="createdOn" label="Created On" flex="2"/>
+                    <treecol id="emailStatus" label="Send Status" flex="1"/>
+		  </treecols>
+		
+		  <treechildren id="out-of-stock-treechildren" context="menupopup-Row"/>
+		
+	 </tree>
+
+         <hbox style="padding-left:200px">
+               <button label="Send Email" accesskey="S" oncommand="outOfStock.sendEmailConfirm();"/>
+               <button label="Close" accesskey="C" oncommand="window.close();"/>
+         </hbox>
+</page>

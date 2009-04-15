@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="delete-blacklist" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="BlackList"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0], window.arguments[1])">
+	  <script src="jquery.js"/>
+	  <script src="blacklist.js"/>
+	  <script type="application/x-javascript">
+	       function init(idArray, emailArray) {
+		    for (var x in emailArray)
+		    {
+			 var blacklist = document.getElementById("blacklist");
+                         
+                         var hbox = blacklist.ownerDocument.createElement("hbox");
+                         blacklist.appendChild(hbox);
+                         
+                         var label = hbox.ownerDocument.createElement("label");
+                         label.setAttribute("id", "blacklistI-" + x.toString());
+                         label.setAttribute("value", idArray[x]);
+                         hbox.appendChild(label);
+                         
+			 var label = hbox.ownerDocument.createElement("label");
+			 label.setAttribute("id", "blacklistV-" + x.toString());
+			 label.setAttribute("value", emailArray[x]);
+			 hbox.appendChild(label);
+		    }
+		    document.getElementById('totalNum').value = emailArray.length-1;
+	       }
+	  </script>
+	  <groupbox id="blacklist">
+	      <caption label="Delete BlackList Email"/>
+	  </groupbox>
+	  <hbox>
+	    <button label="Submit" oncommand="BlackList.delete();"/>
+	    <button label="Cancel" oncommand="window.close();"/>
+	    <label id="totalNum" disabled="true"/>
+	  </hbox>
+</page>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://backoffice/skin/overlay.css" type="text/css"?>
+<overlay id="poster-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+        <script src="jquery.js"/>
+        <script src="wz_jsgraphics.js"/>
+        <script src="overlay.js"/>
+	<popup id="contentAreaContextMenu">
+	  <menu label="Back Office">
+	    <menupopup>
+	      <menuitem label="订单和出货查询" oncommand="showSearchWindows();"/>
+	      <menuitem label="根据选中的订单查询"  oncommand="showSelectOrderWindows();"/>
+	      <menuitem label="根据选中的出货查询"  oncommand="showSelectshipmentWindows();"/>
+	      <menuseparator />
+              <!--<menuitem label="Add email to blacklist by input"  oncommand="showInputEmailWindows();"/>-->
+	      <menuitem label="把选中的邮件地址加入黑名单"  oncommand="showSelectEmailWindows();"/>
+              <menuitem label="检查选中的邮件地址是否在黑名单中"  oncommand="checkEmailWindows();"/>
+	    </menupopup>
+  	 </menu>
+	</popup>
+
+  <statusbar id="status-bar">
+      <statusbarpanel id="backoffice-statusbarpanel" context="backoffice-statepopup" >
+        <toolbarbutton image="chrome://backoffice/skin/status-icon-a.png" tooltiptext="BackOffice Toolbox"/>
+        <popup id="backoffice-statepopup">
+            <menuitem label="黑名单管理" oncommand="mangeBlacklistWindows();"/>
+            <menuitem label="根据日期检查含有黑名单中邮件地址的订单"  oncommand="checkDateBlacklistWindows();"/>
+            <menuseparator />
+            <menuitem label="生成清扫"  oncommand="generateCleanupWindows();"/>
+            <menuitem label="生成报告"  oncommand="reportWindows();"/>
+            <!--
+            <menuseparator />
+            <menuitem label="Customer Access Page Track"  oncommand="customerAccessPageTrack();"/>
+            <menuseparator />
+            <menuitem label="Uxcell Page Click Track(Today)"  oncommand="clickTrack();"/>
+            <menuitem label="Test1"  oncommand="test1();"/>
+            <menuitem label="Test2"  oncommand="test2();"/>
+            <menuseparator />
+            <menuitem label="Email Template Manage"  oncommand="emailTemplateManageWindows();"/>
+            <menuitem label="Search Order and Send Email"  oncommand="ssOrderWindows();"/>
+            <menuitem label="Out Of Stock"  oncommand="outOfStockWindows();"/>
+            <menuitem label="Out Of Stock Email Template Manage"  oncommand="outOfStockEmailManageWindows();"/>
+	    -->
+	</popup>
+    </statusbarpanel>
+  </statusbar>
+</overlay>

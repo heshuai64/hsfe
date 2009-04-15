@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://backoffice/skin/notify.css" type="text/css"?>
+<window onload="initialize();"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <hbox>
+    <vbox>
+      <image id="image"/>
+    </vbox>
+    <vbox>
+      <label id="header"/>
+      <description id="text"/>
+    </vbox>
+  </hbox>
+  <script>
+    var closeTimeout;
+    var [image, header, text, time, onClick] = window.arguments;
+
+    function initialize() {
+      document.getElementById("header").value = header;
+      document.getElementById("text").value = text;
+      document.getElementById("image").src = image;
+
+      addEventListener("click", function() {
+        clearTimeout(closeTimeout);
+        if (onClick) onClick();
+        window.close();
+      }, false);
+
+      // Let some time to render content
+
+      setTimeout(function() {
+        closeTimeout = setTimeout(window.close, time);
+        sizeToContent();
+        moveTo(opener.screenX + opener.outerWidth - outerWidth,
+               opener.screenY + opener.outerHeight - outerHeight);
+      }, 0);
+    }
+  </script>
+</window>

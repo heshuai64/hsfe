@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<window id="response" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+	title="BackOffice Login" xmlns:h="http://www.w3.org/1999/xhtml" flex="1"
+	onload="init(window.arguments[0])">
+	<script src="backoffice.js"/>
+	<script src="jquery.js"/>
+	<script type="application/x-javascript">
+			function init(data) {
+				document.getElementById('detailUrl').value = data.detailUrl;
+				document.getElementById('parameters').value = data.parameters;
+			}
+	</script>
+	<vbox>
+		<label value="Please login"/>
+		<grid flex="1">
+		  <columns>
+		    <column flex="1"/>
+		    <column flex="2"/>
+		  </columns>
+		
+		  <rows>
+		    <row>
+		      <label control="id" value="User:"/>
+		      <textbox id="user"/>
+		    </row>
+		    <row>
+		      <label control="password" value="Password:"/>
+		      <textbox id="password" type="password"/>
+		    </row>
+		    <row>
+		      <button label="Submit" oncommand="Search.login();"/>
+		      <spacer flex="1"/>
+		    </row>
+		  </rows>
+		</grid>
+	</vbox>
+	<vbox>
+		<label id="detailUrl" disabled="true"/>
+		<label id="parameters" disabled="true"/>
+	</vbox>
+	
+</window>

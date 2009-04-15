@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="email-template-edit" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Email Template Edit"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0],window.arguments[1])">
+        <script src="jquery.js"/>
+        <script src="email.js"/>
+	<script src="JSON.js"/>
+        <script type="application/x-javascript">
+            function init(nameArray,templateArray){
+                var emailTemplateBox = document.getElementById("email-template-box");
+                var i = -1;
+                for(var x in nameArray){
+                    i++;
+                    var vbox = emailTemplateBox.ownerDocument.createElement("vbox");
+		    emailTemplateBox.appendChild(vbox);
+                    
+                    var label = vbox.ownerDocument.createElement("label");
+                    label.setAttribute("id", "templateName" + i);
+                    label.setAttribute("value", nameArray[x]);
+                    label.setAttribute("style", "align:center");
+                    vbox.appendChild(label);
+                    
+                    var textbox = vbox.ownerDocument.createElement("textbox");
+                    textbox.setAttribute("id", "templateValue" + i);
+                    textbox.setAttribute("multiline", "true");
+                    textbox.setAttribute("height", "160");
+                    textbox.setAttribute("value", templateArray[x]);
+                    vbox.appendChild(textbox);
+                }
+                
+                label = document.getElementById("totalNum");
+                label.setAttribute("value", i);
+            }
+        </script>
+    
+        <vbox id="email-template-box">
+            
+        </vbox>
+
+        <hbox style="padding-left:300px">
+            <label id="totalNum" hidden="true"/>
+            <button label="Submit" oncommand="Email.updateTemplate();"/>
+            <button label="Close" oncommand="window.close();window.openDialog('chrome://backoffice/content/email-template-manage.xul','backoffice-'+(new Date()).getTime(),'centerscreen,chrome,resizable,height=250,width=500');"/>
+        </hbox>
+</page>

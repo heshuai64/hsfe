@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="email-template-add" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Email Template Add"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1">
+        <script src="jquery.js"/>
+        <script src="email.js"/>
+        <script src="JSON.js"/>
+        <vbox id="email-template-box">
+            <hbox>
+                <label value="name:"/>
+                <textbox id="name"/>
+            </hbox>
+            <hbox>
+                <label value="content:"/>
+                <textbox id="content" multiline="true" height="160" width="450"/>
+            </hbox>
+        </vbox>
+
+        <hbox style="padding-left:330px">
+            <button label="Submit" oncommand="Email.createTemplate();"/>
+            <button label="Close" oncommand="window.close();window.openDialog('chrome://backoffice/content/email-template-manage.xul','backoffice-'+(new Date()).getTime(),'centerscreen,chrome,resizable,height=250,width=500');"/>
+        </hbox>
+</page>

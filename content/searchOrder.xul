@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="backoffice-search-window" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Search Orders"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1">
+	 <script src="backoffice.js"/>
+	 <script src="jquery.js"/>
+	<groupbox>
+	  <caption label="Search Orders"/>
+	  <grid>
+	    <columns>
+	      <column flex="1"/>
+	      <column flex="6"/>
+	    </columns>
+	    <rows>
+	      <row>
+	        <label value="Orders Id"/>
+	        <textbox id="ordersId" value=""/>
+	      </row>
+	      <row>
+	        <label value="Seller"/>
+	        <menulist id="sellerId" >
+	          <menupopup>
+	            <menuitem label="---Please Select---" value="" selected="true"/>
+                    <menuitem label="22newcentury" value="22newcentury" />
+                    <menuitem label="actionace007" value="actionace007" />
+                    <menuitem label="aqualuna0001" value="aqualuna0001" />
+                    <menuitem label="ausluna0001" value="ausluna0001" />
+                    <menuitem label="B2B" value="B2B" />
+                    <menuitem label="B2C" value="B2C" />
+                    <menuitem label="bestvaluezone" value="bestvaluezone" />
+                    <menuitem label="bigbargaintown" value="bigbargaintown" />
+                    <menuitem label="bigbigbargain" value="bigbigbargain" />
+                    <menuitem label="boutique_uno" value="boutique_uno" />
+                    <menuitem label="buonshopping" value="buonshopping" />
+	            <menuitem label="ceo1shop" value="ceo1shop" />
+                    <menuitem label="costcocity001" value="costcocity001" />
+                    <menuitem label="costcocity002" value="costcocity002" />
+                    <menuitem label="costcocity003" value="costcocity003" />
+                    <menuitem label="devenus88" value="devenus88" />
+                    <menuitem label="digitalzone01" value="digitalzone01" />
+                    <menuitem label="discounttown" value="discounttown" />
+                    <menuitem label="ioffer" value="ioffer" />
+                    <menuitem label="milancentral" value="milancentral" />
+                    <menuitem label="powerseller2048" value="powerseller2048" />
+                    <menuitem label="powerseller4096" value="powerseller4096" />
+                    <menuitem label="sellerbible" value="sellerbible" />
+                    <menuitem label="shinyempire" value="shinyempire" />
+                    <menuitem label="shinykingdom" value="shinykingdom" />
+                    <menuitem label="sicilydreamer" value="sicilydreamer" />
+                    <menuitem label="solaluna88" value="solaluna88" />
+                    <menuitem label="twigtricks" value="twigtricks" />
+                    <menuitem label="uxcell" value="uxcell"/>
+	          </menupopup>
+	        </menulist>
+	      </row>
+              <row>
+	        <label value="Payment Status"/>
+	        <menulist id="status" >
+	          <menupopup>
+	            <menuitem label="---Please Select---" value="" selected="true"/>
+                    <menuitem label="Quoting" value="N" />
+                    <menuitem label="Quoted" value="Q" />
+                    <menuitem label="Incomplete Checkout" value="M" />
+                    <menuitem label="Waiting Payment" value="W" />
+                    <menuitem label="Pending for Payment Confirmation" value="E" />
+                    <menuitem label="Excess Payment" value="C" />
+                    <menuitem label="Investigate" value="V" />
+                    <menuitem label="Followed up" value="L" />
+                    <menuitem label="Insufficient Payment" value="S" />
+                    <menuitem label="Completed Payment" value="P" />
+                    <menuitem label="Canceled" value="X" />
+	          </menupopup>
+	        </menulist>
+	      </row>
+              <row>
+	        <label value="Buyer Email"/>
+	        <textbox id="billingEmail" value=""/>
+	      </row>
+              <row>
+	        <label value="Buyer Attn / ID"/>
+	        <textbox id="billingAttn" value=""/>
+	      </row>
+              <row>
+	        <label value="Buyer Address"/>
+	        <textbox id="billingAddress" value="" multiline="true"/>
+	      </row>
+              <row>
+	        <label value="Remarks / Note"/>
+	        <textbox id="note" value="" multiline="true"/>
+	      </row>
+              <row>
+	        <label value="Created On"/>
+	        <textbox id="createdOn" value=""/>
+	      </row>
+	      <row>
+	            <button label="Cancel"  oncommand="window.close();"/>
+                    <button label="Search"  oncommand="Email.searchOrder(null, null);"/>
+	      </row>
+	    </rows>
+	  </grid>
+	</groupbox>
+</page>

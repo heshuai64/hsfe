@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<window id="order-list" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Order List"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="Search.orderList(window.arguments[0]);">
+      <script src="backoffice.js"/>
+      <script src="jquery.js"/>
+      <vbox  style="overflow: auto" flex="100">
+            <tree id="order-list-tree" flex="1" rows="10">
+                        <treecols>
+                          <treecol id="ordersId" label="Order Id" primary="true" flex="1"/>  
+                          <treecol id="sellerId" label="Seller"  flex="0"/>
+                          <treecol id="buyerId" label="Buyer" flex="1"/>
+                          <treecol id="grandTotal" label="Cost" flex="1"/>
+                          <treecol id="status" label="Status" flex="1"/>
+                        </treecols>
+                      
+                        <treechildren id="order-list-treechildren"/>
+                      
+            </tree>
+            
+	    <hbox>
+		  <button label="Open" oncommand="Search.openOrderDetailPage();"/>
+		  <button label="Close" oncommand="window.close();"/>
+	    </hbox>
+      </vbox>
+</window>

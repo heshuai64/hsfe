@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="mange-blacklist" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="BlackList"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init()">
+            <script src="jquery.js"/>
+            <script src="blacklist.js"/>
+            <script type="application/x-javascript">
+                function init() {
+                    BlackList.readBlacklist();
+		    //window.sizeToContent();
+                }
+            </script>
+
+	 <menupopup id="menupopup-editRow">
+                  <menuitem label="Add Blacklist" accesskey="A" oncommand="window.close();BlackList.operateRow('add')"/>
+		  <menuitem label="Edit Selected" accesskey="E" oncommand="window.close();BlackList.operateRow('edit')"/>
+		  <menuitem label="Delete Selected" accesskey="D" oncommand="window.close();BlackList.operateRow('delete')"/>
+  	 </menupopup>
+	 <tree id="balcklist-tree" flex="1" rows="10">
+		  <treecols>
+		    <treecol id="id" label="Id" primary="true" flex="1"/>  
+		    <treecol id="email" label="Email"  flex="2"/>
+		    <treecol id="created" label="Created" flex="1"/>
+		    <treecol id="modified" label="Modified" flex="1"/>
+		  </treecols>
+		
+		  <treechildren id="balcklist-treechildren" context="menupopup-editRow"/>
+		
+	 </tree>
+
+         <hbox>
+               <button label="Add" accesskey="A" oncommand="window.close();BlackList.operateRow('add');"/>
+               <button label="Edit" accesskey="E" oncommand="window.close();BlackList.operateRow('edit');"/>
+               <button label="Delete" accesskey="D" oncommand="window.close();BlackList.operateRow('delete');"/>
+               <button label="Close" accesskey="C" oncommand="window.close();"/>
+         </hbox>
+</page>

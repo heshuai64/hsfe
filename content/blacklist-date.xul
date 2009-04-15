@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="check-blacklist" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="BlackList"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0])">
+            <script src="jquery.js"/>
+            <script src="blacklist.js"/>
+            <script type="application/x-javascript">
+                function init(data) {
+                    var blacklistTreechildren = document.getElementById("check-balcklist-treechildren");
+                    for(var x in data){
+                        
+			var treeitem = blacklistTreechildren.ownerDocument.createElement("treeitem");
+			blacklistTreechildren.appendChild(treeitem);
+			
+                        var treerow = treeitem.ownerDocument.createElement("treerow");     
+                        treeitem.appendChild(treerow);
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].ordersId);
+                        treerow.appendChild(treecell);
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].sellerId);
+                        treerow.appendChild(treecell);
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].billingEmail);
+                        treerow.appendChild(treecell);
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");     
+                        treecell.setAttribute("label",data[x].grandTotalCurrency + " " + data[x].grandTotalValue);
+                        treerow.appendChild(treecell);
+                        
+                           switch(data[x].status){
+                                case "N":
+                                        var status = "Quoting";
+                                break;
+                                
+                                case "Q":
+                                        var status = "Quoted";
+                                break;
+                                
+                                case "M":
+                                         var status = "Incomplete Checkout";
+                                break;
+                                
+                                case "W":
+                                        var status = "Waiting Payment";
+                                break;
+                                
+                                case "E":
+                                        var status = "Pending for Payment Confirmation";
+                                break;
+                                
+                                case "C":
+                                        var status = "Excess Payment";
+                                break;
+                                
+                                case "V":
+                                        var status = "Investigate";
+                                break;
+                                
+                                case "L":
+                                        var status = "Followed up";
+                                break;
+                                
+                                case "S":
+                                  var status = "Insufficient Payment";
+                                break;
+                                
+                                case "P":
+                                        var status = "Completed Payment";
+                                break;
+                                
+                                case "X":
+                                        var status = "Canceled";
+                                break;
+                            }
+                            
+                        var treecell = treerow.ownerDocument.createElement("treecell");     
+                        treecell.setAttribute("label",status);
+                        treerow.appendChild(treecell);
+                    }
+                }
+            </script>
+
+	 <tree id="check-balcklist-tree" flex="1" rows="10" enableColumnDrag="true">
+		  <treecols>
+		    <treecol id="ordersId" label="ordersId" primary="true" flex="1"/>  
+		    <treecol id="sellerId" label="sellerId"  flex="1"/>
+		    <treecol id="billingEmail" label="Email" flex="2"/>
+		    <treecol id="grandTotal" label="grandTotal" flex="1"/>
+                    <treecol id="status" label="status" flex="1"/>
+		  </treecols>
+		
+		  <treechildren id="check-balcklist-treechildren"/>
+		
+	 </tree>
+
+         <hbox style="padding-left:300px">
+               <button label="Close" oncommand="window.close();"/>
+         </hbox>
+</page>

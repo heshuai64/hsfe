@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="backoffice-search-window" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Search"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1">
+	 <script src="backoffice.js"/>
+	 <script src="jquery.js"/>
+	<groupbox>
+	  <caption label="Search Order Or Shipment"/>
+	  <grid>
+	    <columns>
+	      <column flex="1"/>
+	      <column flex="3"/>
+	    </columns>
+	    <rows>
+	      <row>
+	        <label value="ID"/>
+	        <textbox id="searchId" multiline="true" value=""/>
+	      </row>
+	      <row>
+	        <label value="Type"/>
+	        <menulist id="searchType" >
+	          <menupopup>
+	            <menuitem label="Order" value="order" selected="true"/>
+	            <menuitem label="Shipment" value="shipment" />
+	          </menupopup>
+	        </menulist>
+	      </row>
+	      <row>
+	        		<button label="Search"  oncommand="Search.search(null, null);"/>
+	        		<button label="Cancel"  oncommand="window.close();"/>
+	      </row>
+	    </rows>
+	  </grid>
+	</groupbox>
+</page>

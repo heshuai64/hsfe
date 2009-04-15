@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://backoffice/skin/default.css" type="text/css"?>
+<page id="customer-access-page-track" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+   title="Customer Access Page Track"
+   xmlns:h="http://www.w3.org/1999/xhtml" flex="1" onload="init(window.arguments[0])">
+            <script type="application/x-javascript">
+                function init(data) {
+                    var customerTrackTreechildren = document.getElementById("customer-track-treechildren");
+                    for(var x in data){
+                        var treeitem = customerTrackTreechildren.ownerDocument.createElement("treeitem");
+			customerTrackTreechildren.appendChild(treeitem);
+			
+                        var treerow = treeitem.ownerDocument.createElement("treerow");     
+                        treeitem.appendChild(treerow);
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].url);
+                        treerow.appendChild(treecell);
+                        
+                        var treecell = treerow.ownerDocument.createElement("treecell");
+                        treecell.setAttribute("label",data[x].time);
+                        treerow.appendChild(treecell);
+                        
+                    }
+                }
+            </script>
+
+	 <tree id="customer-track-tree" flex="1" rows="10">
+		  <treecols>
+		    <treecol id="url" label="URL" primary="true" flex="8"/>  
+		    <treecol id="time" label="Click Time"  flex="1"/>
+		  </treecols>
+		
+		  <treechildren id="customer-track-treechildren"/>
+		
+	 </tree>
+
+         <hbox>
+               <button label="Close" oncommand="window.close();"/>
+         </hbox>
+</page>
