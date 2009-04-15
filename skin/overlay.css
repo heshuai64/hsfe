@@ -1,0 +1,10 @@
+/* This is just an example. You shouldn't do this. */
+#backoffice-status-bar {
+   padding: 0px;
+   margin: 0px;
+}
+
+#backoffice-status-bar toolbarbutton {
+   padding: 0px;
+   margin: 0px;
+}
